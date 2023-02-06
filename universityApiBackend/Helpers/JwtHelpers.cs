@@ -20,9 +20,10 @@ namespace universityApiBackend.Helpers
             if (userAccounts.UserName=="Admin")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
+                //if(userAccounts)
 
             }
-            else if(userAccounts.UserName == "User 1")
+            else if(userAccounts.UserName == "User1")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "User"));
                 claims.Add(new Claim("UserOnly", "User 1"));

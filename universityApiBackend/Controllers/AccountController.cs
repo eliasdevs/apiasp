@@ -38,7 +38,7 @@ namespace universityApiBackend.Controllers
             {
                 Id=3,
                 Email="joseangel@gmail.com",
-                Name="User1",
+                Name="User2",
                 Password="Admin"
             }
         };
@@ -48,11 +48,13 @@ namespace universityApiBackend.Controllers
             try
             {
                 var Token = new UserTokens();
-                var Valid = Logins.Any(user => user.Name.Equals(userLogin.UserName, StringComparison.OrdinalIgnoreCase));
-                if (Valid)
+                // aqui se debe evaluar la password
+                var Valid = Logins.Any(user => user.Name.Equals(userLogin.UserName, StringComparison.OrdinalIgnoreCase) && user.Password.Equals(userLogin.Password, StringComparison.OrdinalIgnoreCase));
+                var Valid2 = Logins.Any(user => user.Password.Equals(userLogin.Password, StringComparison.OrdinalIgnoreCase));
+                if (Valid && Valid2)
                 {
                     var user = Logins.FirstOrDefault(user => user.Name.Equals(userLogin.UserName, StringComparison.OrdinalIgnoreCase));
-
+                    
                     Token = JwtHelpers.GenTokenKey(new UserTokens()
                     {
                         UserName=user.Name,
